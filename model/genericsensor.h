@@ -7,4 +7,4 @@ public:
     GenericSensor();
 };
 
-#endif // GENERICSENSOR_H
+#endif
