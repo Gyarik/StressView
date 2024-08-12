@@ -17,3 +17,6 @@ template <typename T> bool PointInfo<T>::isBad() const
 {
     return m_bad;
 }
+
+template class PointInfo<int>;
+template class PointInfo<float>;
