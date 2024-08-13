@@ -3,6 +3,8 @@
 GenericSensor::GenericSensor(const string &name, const string &desc, int max, int temp)
     : m_name(name), m_desc(desc), m_max(max), m_temp(temp) {}
 
+GenericSensor::~GenericSensor() {}
+
 string GenericSensor::getName() const
 {
     return m_name;

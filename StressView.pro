@@ -10,9 +10,11 @@ QT += charts
 
 SOURCES += \
     main.cpp \
+    model/cpusensor.cpp \
     model/genericsensor.cpp \
     model/pointinfo.cpp
 
 HEADERS += \
+    model/cpusensor.h \
     model/genericsensor.h \
     model/pointinfo.h
