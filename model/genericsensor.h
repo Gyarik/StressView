@@ -16,7 +16,7 @@ private:
     int m_max, m_temp;
 
 protected:
-    vector<PointInfo<variant<int, float>>> data;
+    vector<PointInfo<variant<int, float>>> m_data;
 
 public:
     GenericSensor(const string & = "untitled", const string & = "", int = 0, int = 80);
