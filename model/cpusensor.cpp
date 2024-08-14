@@ -13,8 +13,8 @@ void CPUSensor::populate()
     // Declare variables and create first arbitrary value
     const float maxVal = getMax() / 1000.0f;
     const int maxTemp = getTemp();
-    float curVal;
-    float firstVal = curVal = maxVal - maxVal * 0.1f;
+    float curVal = maxVal - maxVal * 0.1f;
+    float firstVal = curVal;
     int curTemp = maxTemp - (int)(maxTemp * 0.2f);
     m_data.push_back(new PointInfoFloat(firstVal, 0, curTemp, false));
     bool bad = false;
