@@ -32,17 +32,15 @@ void CPUSensor::populate()
 
         // If temperature is over 95C, 70% chance to generate bad number
         uni = std::uniform_int_distribution<int>(1, 100);
+        std::uniform_real_distribution<float> unifloat(firstVal - 0.1f * firstVal, maxVal);
         if(curTemp >= 95 && uni(rng) <= 70)
         {
-            std::uniform_real_distribution<float> unifloat(0.5f * prevVal, 0.7f * prevVal);
+            unifloat = std::uniform_real_distribution<float>(0.5f * prevVal, 0.7f * prevVal);
             curVal = prevVal - unifloat(rng);
         }
         // otherwise generate normally
         else
-        {
-            std::uniform_real_distribution<float> unifloat(firstVal - 0.1f * firstVal, maxVal);
             curVal = unifloat(rng);
-        }
 
         // A performance value is bad when current value is 20% worse than first value
         bad = curVal <= (0.8f * firstVal);
