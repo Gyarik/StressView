@@ -19,7 +19,7 @@ void GPUSensor::populate()
     int randMaxInt = 5000;
     int curVal = rand() % (maxVal - randMinInt + 1) + randMinInt;
     // const int firstVal = curVal;
-    randMinInt = maxTemp - (int)(0.5f * maxTemp);
+    randMinInt = (int)(0.5f * maxTemp);
     int curTemp = rand() % (maxTemp - randMinInt + 1) + randMinInt;
     int prevVal = curVal;
     int firstVal = curVal;
