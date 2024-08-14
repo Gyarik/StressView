@@ -17,7 +17,6 @@ void CPUSensor::populate()
     float firstVal = curVal = maxVal - maxVal * 0.1f;
     int curTemp = maxTemp - (int)(maxTemp * 0.2f);
     m_data.push_back(new PointInfoFloat(firstVal, 0, curTemp, false));
-    float prevVal = curVal;
     bool bad = false;
 
     // Setup random number generation (uniform distribution)
@@ -35,8 +34,8 @@ void CPUSensor::populate()
         std::uniform_real_distribution<float> unifloat(firstVal - 0.1f * firstVal, maxVal);
         if(curTemp >= 95 && uni(rng) <= 70)
         {
-            unifloat = std::uniform_real_distribution<float>(0.5f * prevVal, 0.7f * prevVal);
-            curVal = prevVal - unifloat(rng);
+            unifloat = std::uniform_real_distribution<float>(0.5f * firstVal, 0.7f * firstVal);
+            curVal = firstVal - unifloat(rng);
         }
         // otherwise generate normally
         else
@@ -46,7 +45,6 @@ void CPUSensor::populate()
         bad = curVal <= (0.8f * firstVal);
 
         m_data.push_back(new PointInfoFloat(curVal, i+1, curTemp, bad));
-        prevVal = curVal;
     }
 }
 
