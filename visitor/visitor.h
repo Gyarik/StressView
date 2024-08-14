@@ -11,6 +11,7 @@ public:
     Visitor();
     virtual ~Visitor();
     virtual void visit(const CPUSensor *) override;
+    virtual void visit(const GPUSensor *) override;
     virtual string getType() const override;
 };
 

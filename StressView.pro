@@ -12,6 +12,7 @@ SOURCES += \
     main.cpp \
     model/cpusensor.cpp \
     model/genericsensor.cpp \
+    model/gpusensor.cpp \
     model/pointinfo/pointinfo.cpp \
     model/pointinfo/pointinfofloat.cpp \
     model/pointinfo/pointinfoint.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
 HEADERS += \
     model/cpusensor.h \
     model/genericsensor.h \
+    model/gpusensor.h \
     model/pointinfo/pointinfo.h \
     model/pointinfo/pointinfofloat.h \
     model/pointinfo/pointinfoint.h \
