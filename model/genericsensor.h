@@ -1,6 +1,6 @@
 #ifndef GENERICSENSOR_H
 #define GENERICSENSOR_H
-#include "../model/pointinfo.h"
+#include "../model/pointinfo/pointinfo.h"
 #include <string>
 #include <vector>
 #include <variant>
@@ -16,7 +16,7 @@ private:
     int m_max, m_temp;
 
 protected:
-    vector<variant<PointInfo<int>, PointInfo<float>>> m_data;
+    vector<PointInfo*> m_data;
 
 public:
     GenericSensor(const string & = "untitled", const string & = "", int = 0, int = 80);
