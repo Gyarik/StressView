@@ -9,7 +9,10 @@ CPUSensor::CPUSensor(const string &name, const string &desc, int max, int temp)
 CPUSensor::~CPUSensor() {}
 
 void CPUSensor::populate()
-{   
+{
+    // Delete all data before creating new simulation
+    this->deleteData();
+
     // Declare variables and create first arbitrary value
     const float maxVal = getMax() / 1000.0f;
     const int maxTemp = getTemp();
