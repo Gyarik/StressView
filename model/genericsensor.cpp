@@ -3,7 +3,10 @@
 GenericSensor::GenericSensor(const string &name, const string &desc, int max, int temp)
     : m_name(name), m_desc(desc), m_max(max), m_temp(temp) {}
 
-GenericSensor::~GenericSensor() {}
+GenericSensor::~GenericSensor()
+{
+    this->deleteData();
+}
 
 string GenericSensor::getName() const
 {
@@ -28,4 +31,11 @@ int GenericSensor::getTemp() const
 int GenericSensor::getCount() const
 {
     return m_data.size();
+}
+
+void GenericSensor::deleteData()
+{
+    for(auto it = m_data.begin(); it != m_data.end(); ++it)
+        delete *it;
+    m_data.clear();
 }

@@ -22,13 +22,14 @@ protected:
 
 public:
     GenericSensor(const string & = "untitled", const string & = "", int = 0, int = 80);
-    virtual ~GenericSensor() = 0;
+    virtual ~GenericSensor();
     virtual void populate() = 0;
     string getName() const;
     string getDesc() const;
     int getMax() const;
     int getTemp() const;
     int getCount() const;
+    void deleteData();
 
     virtual void accept(GenericVisitor *) const = 0;
 };
