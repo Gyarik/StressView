@@ -9,6 +9,8 @@ using std::string;
 using std::vector;
 using std::variant;
 
+class GenericVisitor;
+
 class GenericSensor
 {
 private:
@@ -27,6 +29,8 @@ public:
     int getMax() const;
     int getTemp() const;
     int getCount() const;
+
+    virtual void accept(GenericVisitor *) const = 0;
 };
 
 #endif

@@ -8,6 +8,8 @@ public:
     CPUSensor(const string & = "untitled", const string & = "", int = 0, int = 80);
     virtual ~CPUSensor();
     virtual void populate() override;
+
+    virtual void accept(GenericVisitor *) const override;
 };
 
 #endif

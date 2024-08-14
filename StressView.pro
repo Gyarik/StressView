@@ -14,11 +14,15 @@ SOURCES += \
     model/genericsensor.cpp \
     model/pointinfo/pointinfo.cpp \
     model/pointinfo/pointinfofloat.cpp \
-    model/pointinfo/pointinfoint.cpp
+    model/pointinfo/pointinfoint.cpp \
+    visitor/genericvisitor.cpp \
+    visitor/visitor.cpp
 
 HEADERS += \
     model/cpusensor.h \
     model/genericsensor.h \
     model/pointinfo/pointinfo.h \
     model/pointinfo/pointinfofloat.h \
-    model/pointinfo/pointinfoint.h
+    model/pointinfo/pointinfoint.h \
+    visitor/genericvisitor.h \
+    visitor/visitor.h
