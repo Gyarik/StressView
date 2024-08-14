@@ -22,6 +22,7 @@ void GPUSensor::populate()
     randMinInt = maxTemp - (int)(0.5f * maxTemp);
     int curTemp = rand() % (maxTemp - randMinInt + 1) + randMinInt;
     int prevVal = curVal;
+    int firstVal = curVal;
     bool bad = false;
 
     for(int i = 0; i < 20; ++i)
@@ -39,8 +40,8 @@ void GPUSensor::populate()
         // If temperature is over 100C, 80% chance to generate bad number
         else if(curTemp >= 100 && rand() % 100 + 1 <= 80)
         {
-            randMinInt = (int)(0.3f * prevVal);
-            randMaxInt = (int)(0.6f * prevVal);
+            randMinInt = (int)(0.3f * firstVal);
+            randMaxInt = (int)(0.6f * firstVal);
         }
         // otherwise generate normally
         else
@@ -50,7 +51,7 @@ void GPUSensor::populate()
         }
         curVal = rand() % (randMaxInt - randMinInt + 1) + randMinInt;
 
-        bad = curVal <= (0.5f * maxVal);
+        bad = curVal <= (0.5f * firstVal);
 
         m_data.push_back(new PointInfoInt(curVal, i+1, curTemp, bad));
     }
