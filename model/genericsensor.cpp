@@ -38,7 +38,7 @@ void GenericSensor::setName(const string &name)
     this->m_name = name;
 }
 
-void GenericSensor::setDesc(const string &name)
+void GenericSensor::setDesc(const string &desc)
 {
     this->m_desc = desc;
 }

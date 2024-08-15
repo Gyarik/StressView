@@ -17,6 +17,7 @@ SOURCES += \
     model/pointinfo/pointinfofloat.cpp \
     model/pointinfo/pointinfoint.cpp \
     model/ramsensor.cpp \
+    model/sensorcontainer.cpp \
     visitor/genericvisitor.cpp \
     visitor/visitor.cpp
 
@@ -28,5 +29,6 @@ HEADERS += \
     model/pointinfo/pointinfofloat.h \
     model/pointinfo/pointinfoint.h \
     model/ramsensor.h \
+    model/sensorcontainer.h \
     visitor/genericvisitor.h \
     visitor/visitor.h
