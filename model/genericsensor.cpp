@@ -33,6 +33,26 @@ int GenericSensor::getCount() const
     return m_data.size();
 }
 
+void GenericSensor::setName(const string &name)
+{
+    this->m_name = name;
+}
+
+void GenericSensor::setDesc(const string &name)
+{
+    this->m_desc = desc;
+}
+
+void GenericSensor::setMax(int max)
+{
+    this->m_max = max;
+}
+
+void GenericSensor::setTemp(int temp)
+{
+    this->m_temp = temp;
+}
+
 void GenericSensor::deleteData()
 {
     for(auto it = m_data.begin(); it != m_data.end(); ++it)

@@ -29,6 +29,10 @@ public:
     int getMax() const;
     int getTemp() const;
     int getCount() const;
+    void setName(const string &);
+    void setDesc(const string &);
+    void setMax(int);
+    void setTemp(int);
     void deleteData();
 
     virtual void accept(GenericVisitor *) const = 0;
