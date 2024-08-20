@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = HazardView
+TARGET = StressView
 INCLUDEPATH += .
 CONFIG += c++17
 
@@ -18,6 +18,7 @@ SOURCES += \
     model/pointinfo/pointinfoint.cpp \
     model/ramsensor.cpp \
     model/sensorcontainer.cpp \
+    view/mainwindow.cpp \
     visitor/genericvisitor.cpp \
     visitor/visitor.cpp
 
@@ -30,5 +31,6 @@ HEADERS += \
     model/pointinfo/pointinfoint.h \
     model/ramsensor.h \
     model/sensorcontainer.h \
+    view/mainwindow.h \
     visitor/genericvisitor.h \
     visitor/visitor.h
