@@ -18,6 +18,7 @@ SOURCES += \
     model/pointinfo/pointinfoint.cpp \
     model/ramsensor.cpp \
     model/sensorcontainer.cpp \
+    view/addsensor.cpp \
     view/mainwindow.cpp \
     view/sensorlistwidget.cpp \
     visitor/genericvisitor.cpp \
@@ -32,11 +33,13 @@ HEADERS += \
     model/pointinfo/pointinfoint.h \
     model/ramsensor.h \
     model/sensorcontainer.h \
+    view/addsensor.h \
     view/mainwindow.h \
     view/sensorlistwidget.h \
     visitor/genericvisitor.h \
     visitor/visitor.h
 
 FORMS += \
+    view/addsensor.ui \
     view/mainwindow.ui \
     view/sensorlistwidget.ui

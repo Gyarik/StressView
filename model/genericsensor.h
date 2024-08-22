@@ -36,6 +36,7 @@ public:
     void deleteData();
 
     virtual void accept(GenericVisitor *) const = 0;
+    virtual void setupButton(GenericVisitor *) const = 0;
 };
 
 #endif

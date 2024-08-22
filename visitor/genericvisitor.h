@@ -4,6 +4,7 @@
 #include "../model/gpusensor.h"
 #include "../model/ramsensor.h"
 #include <string>
+#include <QPushButton>
 
 using std::string;
 
@@ -15,7 +16,13 @@ public:
     virtual void visit(const CPUSensor *) = 0;
     virtual void visit(const GPUSensor *) = 0;
     virtual void visit(const RAMSensor *) = 0;
+
     virtual string getType() const = 0;
+    virtual QPushButton *getButton() const = 0;
+
+    virtual void listButton(const CPUSensor *) = 0;
+    virtual void listButton(const GPUSensor *) = 0;
+    virtual void listButton(const RAMSensor *) = 0;
 };
 
 #endif

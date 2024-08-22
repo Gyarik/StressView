@@ -2,9 +2,12 @@
 #define SENSORLISTWIDGET_H
 #include <QWidget>
 #include <QPushButton>
+#include <QMessageBox>
+#include <QRegularExpressionValidator>
 #include <vector>
 #include "../model/genericsensor.h"
 #include "../visitor/genericvisitor.h"
+#include "../model/sensorcontainer.h"
 
 using std::vector;
 
@@ -20,11 +23,28 @@ class SensorListWidget : public QWidget
 private:
     Ui::SensorListWidget *ui;
     static vector<QPushButton *> buttons;
-
+    GenericSensor *curSensor;
 
 public:
     explicit SensorListWidget(QWidget *parent = nullptr);
     ~SensorListWidget();
+    void setCurrent(GenericSensor *);
+    void newButton(GenericSensor *, GenericVisitor *);
+
+signals:
+    void curSensorChange();
+    void tryNew();
+    void removedSensor();
+    void clearedList();
+    void nameCpy(GenericSensor *);
+
+private slots:
+    void searchBtn(const QString &);
+    void onNewClicked();
+    void onRemoveClicked();
+
+public slots:
+    void onClearClicked();
 };
 
 #endif

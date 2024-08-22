@@ -61,3 +61,9 @@ void GPUSensor::accept(GenericVisitor *visitor) const
 {
     return visitor->visit(this);
 }
+
+void GPUSensor::setupButton(GenericVisitor *visitor) const
+{
+    return visitor->listButton(this);
+}
+

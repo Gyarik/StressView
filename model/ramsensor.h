@@ -10,6 +10,7 @@ public:
     virtual void populate() override;
 
     virtual void accept(GenericVisitor *) const override;
+    virtual void setupButton(GenericVisitor *) const override;
 };
 
 #endif

@@ -56,3 +56,8 @@ void RAMSensor::accept(GenericVisitor *visitor) const
 {
     return visitor->visit(this);
 }
+
+void RAMSensor::setupButton(GenericVisitor *visitor) const
+{
+    return visitor->listButton(this);
+}
