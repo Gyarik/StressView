@@ -2,8 +2,8 @@
 #include "../visitor/genericvisitor.h"
 #include "../model/pointinfo/pointinfoint.h"
 
-RAMSensor::RAMSensor(const string &name, const string &desc, int max)
-    : GenericSensor::GenericSensor(name, desc, max, 80) {}
+RAMSensor::RAMSensor(const string &name, const string &desc, int max, int temp)
+    : GenericSensor::GenericSensor(name, desc, max, temp) {}
 
 RAMSensor::~RAMSensor() {}
 

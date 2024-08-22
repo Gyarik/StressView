@@ -135,6 +135,9 @@
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
@@ -163,7 +166,7 @@
               </size>
              </property>
              <property name="text">
-              <string>Max - </string>
+              <string>Max -</string>
              </property>
             </widget>
            </item>
@@ -180,12 +183,22 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QLabel" name="UnitLabel">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -215,12 +228,12 @@
               </size>
              </property>
              <property name="text">
-              <string>Temp - </string>
+              <string>Temp -</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="QLineEdit" name="TempInput">
              <property name="maximumSize">
               <size>
                <width>75</width>
@@ -232,12 +245,22 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QLabel" name="Degrees">
+             <property name="text">
+              <string>°C</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>

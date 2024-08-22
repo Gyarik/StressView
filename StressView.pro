@@ -19,6 +19,7 @@ SOURCES += \
     model/ramsensor.cpp \
     model/sensorcontainer.cpp \
     view/addsensor.cpp \
+    view/errorwindow.cpp \
     view/mainwindow.cpp \
     view/sensorlistwidget.cpp \
     visitor/genericvisitor.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     model/ramsensor.h \
     model/sensorcontainer.h \
     view/addsensor.h \
+    view/errorwindow.h \
     view/mainwindow.h \
     view/sensorlistwidget.h \
     visitor/genericvisitor.h \
@@ -41,5 +43,6 @@ HEADERS += \
 
 FORMS += \
     view/addsensor.ui \
+    view/errorwindow.ui \
     view/mainwindow.ui \
     view/sensorlistwidget.ui

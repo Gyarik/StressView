@@ -3,7 +3,9 @@
 #include <QMainWindow>
 #include <QSplitter>
 #include "../model/sensorcontainer.h"
+#include "../visitor/visitor.h"
 #include "../view/sensorlistwidget.h"
+#include "../view/addsensor.h"
 
 namespace Ui
 {
@@ -17,6 +19,7 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
     static SensorContainer *list;
+    static Visitor *visitor;
     SensorListWidget *listWidget;
     QSplitter *hor;
     QSplitter *vert;
@@ -29,6 +32,7 @@ public:
 private slots:
     void printInfo(GenericSensor *);
     void onTryNew();
+    void onInfoExists(GenericSensor *);
 };
 
 #endif

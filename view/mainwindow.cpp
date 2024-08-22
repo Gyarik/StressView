@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+SensorContainer *MainWindow::list = new SensorContainer();
+Visitor *MainWindow::visitor = new Visitor();
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -43,5 +46,17 @@ void MainWindow::printInfo(GenericSensor *sen)
 
 void MainWindow::onTryNew()
 {
+    AddSensor *addWidget = new AddSensor();
+    addWidget->show();
+    connect(addWidget, &AddSensor::infoExists, this, &MainWindow::onInfoExists);
+}
 
+void MainWindow::onInfoExists(GenericSensor *sen)
+{
+    if(MainWindow::list->addSensor(sen))
+        listWidget->newButton(sen, visitor);
+    else
+    {
+        return;
+    }
 }
