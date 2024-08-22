@@ -15,15 +15,17 @@ const vector<GenericSensor *> & SensorContainer::getContainer()
     return m_cont;
 }
 
-void SensorContainer::addSensor(GenericSensor *sen)
+bool SensorContainer::addSensor(GenericSensor *sen)
 {
+
     for(auto it = m_cont.begin(); it != m_cont.end(); ++it)
     {
         if((*it)->getName() == sen->getName())
-            return;
+            return false;
     }
 
     m_cont.push_back(sen);
+    return true;
 }
 
 void SensorContainer::removeSensor(GenericSensor *sen)

@@ -19,7 +19,7 @@ public:
     static const vector<GenericSensor *> & getContainer();
 
     // Sensor related methods
-    void addSensor(GenericSensor *);
+    bool addSensor(GenericSensor *);
     static void removeSensor(GenericSensor *);
     void editSensor(GenericSensor *, const string &, const string &, int, int);
 
