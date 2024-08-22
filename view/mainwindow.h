@@ -1,26 +1,26 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include <QMainWindow>
-#include "../model/genericsensor.h"
-#include "../model/sensorcontainer.h"
 
-QT_BEGIN_NAMESPACE
-namespace View
+#include <QMainWindow>
+
+namespace Ui
 {
     class MainWindow;
 }
-QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-private:
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    GenericSensor *newSensor(const string &, const string &, const string &, int, int) const;
+    ~MainWindow();
 
-signals:
+private slots:
+    void on_simButton_clicked();
+
+private:
+    Ui::MainWindow *ui;
 };
 
 #endif

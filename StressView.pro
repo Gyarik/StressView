@@ -34,3 +34,6 @@ HEADERS += \
     view/mainwindow.h \
     visitor/genericvisitor.h \
     visitor/visitor.h
+
+FORMS += \
+    view/mainwindow.ui
