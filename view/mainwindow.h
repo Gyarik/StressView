@@ -6,6 +6,7 @@
 #include "../visitor/visitor.h"
 #include "../view/sensorlistwidget.h"
 #include "../view/addsensor.h"
+#include "../view/errorwindow.h"
 
 namespace Ui
 {

@@ -68,7 +68,8 @@ void AddSensor::on_NewSensorButton_clicked()
 
     if(name.isEmpty())
     {
-        return;
+        ErrorWindow *Error = new ErrorWindow("Sensor name cannot be empty", this);
+        Error->show();
     }
     else
     {
@@ -103,7 +104,8 @@ void AddSensor::on_NewSensorButton_clicked()
         }
         else
         {
-            return;
+            ErrorWindow *Error = new ErrorWindow("Bounds info is missing", this);
+            Error->show();
         }
     }
 }

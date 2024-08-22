@@ -6,6 +6,7 @@
 #include "../model/cpusensor.h"
 #include "../model/gpusensor.h"
 #include "../model/ramsensor.h"
+#include "../view/errorwindow.h"
 
 namespace Ui
 {

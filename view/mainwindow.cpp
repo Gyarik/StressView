@@ -57,6 +57,7 @@ void MainWindow::onInfoExists(GenericSensor *sen)
         listWidget->newButton(sen, visitor);
     else
     {
-        return;
+        ErrorWindow *Error = new ErrorWindow("Cannot create sensor: Name already in use", this);
+        Error->show();
     }
 }
