@@ -17,7 +17,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_simButton_clicked();
 
 private:
     Ui::MainWindow *ui;
