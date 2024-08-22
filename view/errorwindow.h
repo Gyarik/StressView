@@ -3,20 +3,23 @@
 
 #include <QDialog>
 
-namespace Ui {
-class ErrorWindow;
+namespace Ui
+{
+    class ErrorWindow;
 }
 
 class ErrorWindow : public QDialog
 {
     Q_OBJECT
 
-public:
-    explicit ErrorWindow(QWidget *parent = nullptr);
-    ~ErrorWindow();
-
 private:
     Ui::ErrorWindow *ui;
+
+public:
+    explicit ErrorWindow(QString msg = "error", QWidget *parent = nullptr);
+    ~ErrorWindow();
+private slots:
+    void on_ErrorConfirm_clicked();
 };
 
 #endif // ERRORWINDOW_H
