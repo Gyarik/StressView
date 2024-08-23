@@ -25,6 +25,9 @@ public:
 
     // Search function
     GenericSensor * searchSensor(const string &) const;
+
+    // Check for same name
+    bool isEqual(const string &, const string &) const;
 };
 
 #endif

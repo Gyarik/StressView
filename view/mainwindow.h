@@ -8,6 +8,7 @@
 #include "../view/addsensor.h"
 #include "../view/errorwindow.h"
 #include "../view/sensorinfowidget.h"
+#include "../view/modifysensor.h"
 
 namespace Ui
 {
@@ -24,15 +25,20 @@ private:
     static Visitor *visitor;
     SensorListWidget *listWidget;
     SensorInfoWidget *infoWidget;
+    ModifySensor *editWidget;
     QSplitter *vertSplit;
     QSplitter *horSplit;
     bool isSplitterGood = false;
     int threshold = 180;
+    string prevName;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void newButton();
+
+signals:
+    void canEdit();
 
 private slots:
     void printInfo(GenericSensor *);
@@ -40,6 +46,10 @@ private slots:
     void onNewAddable(GenericSensor *);
     void onRemovedSensor();
     void onClearedList();
+    void onEditSensor();
+    //void onClearSensor();
+    void onChangeSensor();
+    void onRefreshInfo(const GenericSensor *, const string &);
 };
 
 #endif

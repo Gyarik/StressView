@@ -32,6 +32,11 @@ void SensorListWidget::setCurrent(GenericSensor *sen)
     emit curSensorChange();
 }
 
+GenericSensor *SensorListWidget::getCurrent() const
+{
+    return this->curSensor;
+}
+
 void SensorListWidget::newButton(GenericSensor *sen, GenericVisitor *vis)
 {
     sen->setupButton(vis);
@@ -40,6 +45,22 @@ void SensorListWidget::newButton(GenericSensor *sen, GenericVisitor *vis)
     connect(ret, &QPushButton::clicked, this, [this, sen]() {setCurrent(sen);});
     buttons.push_back(ret);
     ui->VLayout->addWidget(ret);
+}
+
+void SensorListWidget::changeButton(const string &curName, const string &prevName)
+{
+    for(auto it = buttons.begin(); it != buttons.end(); ++it)
+    {
+        if((*it)->objectName().remove("&").toStdString() == prevName)
+        {
+            (*it)->setObjectName(QString::fromStdString(curName));
+            delete (*it)->layout()->itemAt(0)->widget();
+            QLabel *txt = new QLabel(QString::fromStdString(curName));
+            txt->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+            (*it)->layout()->addWidget(txt);
+            return;
+        }
+    }
 }
 
 // Slots

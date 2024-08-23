@@ -34,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(listWidget, &SensorListWidget::removedSensor, this, &MainWindow::onRemovedSensor);
     connect(listWidget, &SensorListWidget::clearedList, this, &MainWindow::onClearedList);
 
+    connect(infoWidget, &SensorInfoWidget::editSensor, this, &MainWindow::onEditSensor);
+    //connect(infoWidget, &SensorInfoWidget::clearSensor, this, &MainWindow::onClearSensor());
+
     connect(vertSplit, &QSplitter::splitterMoved, this, [this](int p)
     {
         if(p < threshold)
@@ -100,4 +103,39 @@ void MainWindow::onClearedList()
     listWidget->setCurrent(nullptr);
     list->emptyContainer();
     infoWidget->resetFields();
+}
+
+void MainWindow::onEditSensor()
+{
+    if(listWidget->getCurrent() != nullptr)
+    {
+        GenericSensor *sensor = listWidget->getCurrent();
+        prevName = sensor->getName();
+        editWidget = new ModifySensor(sensor);
+        editWidget->show();
+
+        connect(editWidget, &ModifySensor::changeSensor, this, &MainWindow::onChangeSensor);
+        connect(this, &MainWindow::canEdit, editWidget, &ModifySensor::onCanEdit);
+        connect(editWidget, &ModifySensor::refreshInfo, this, &MainWindow::onRefreshInfo);
+    }
+}
+
+void MainWindow::onChangeSensor()
+{
+    string cur = editWidget->getName();
+    if(MainWindow::list->isEqual(cur, prevName))
+        emit canEdit();
+    else
+    {
+        ErrorWindow *Error = new ErrorWindow("Another sensor with the same name exists");
+        Error->show();
+    }
+}
+
+void MainWindow::onRefreshInfo(const GenericSensor *sen, const string &prev)
+{
+    infoWidget->setName(QString::fromStdString(sen->getName()));
+    infoWidget->setDesc(QString::fromStdString(sen->getDesc()));
+    infoWidget->setBounds(QString::number(sen->getMax()), QString::number(sen->getTemp()));
+    listWidget->changeButton(sen->getName(), prev);
 }

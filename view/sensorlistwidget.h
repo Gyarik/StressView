@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QRegularExpressionValidator>
+#include <QLabel>
 #include <vector>
 #include "../model/genericsensor.h"
 #include "../visitor/genericvisitor.h"
@@ -29,7 +30,9 @@ public:
     explicit SensorListWidget(QWidget *parent = nullptr);
     ~SensorListWidget();
     void setCurrent(GenericSensor *);
+    GenericSensor *getCurrent() const;
     void newButton(GenericSensor *, GenericVisitor *);
+    void changeButton(const string &, const string &);
 
 signals:
     void curSensorChange();
