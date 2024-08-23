@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle(QString::fromStdString("StressView"));
     listWidget = new SensorListWidget(this);
+    infoWidget = new SensorInfoWidget(this);
 
     hor = new QSplitter;
     vert = new QSplitter;
@@ -17,15 +18,26 @@ MainWindow::MainWindow(QWidget *parent)
     hor->setChildrenCollapsible(false);
     vert->setChildrenCollapsible(false);
     vert->setOrientation(Qt::Vertical);
-    vert->addWidget(listWidget);
+    vert->addWidget(infoWidget);
+    hor->addWidget(listWidget);
+    hor->setHandleWidth(10);
+    vert->setHandleWidth(10);
 
     QList<int> sz;
-    sz << 100 << 300;
+    sz << 100 << 330;
     vert->setSizes(sz);
-    this->setCentralWidget(vert);
+    this->setCentralWidget(hor);
 
     connect(listWidget, &SensorListWidget::nameCpy, this, &MainWindow::printInfo);
     connect(listWidget, &SensorListWidget::tryNew, this, &MainWindow::onTryNew);
+
+    connect(vert, &QSplitter::splitterMoved, this, [this](int p)
+    {
+        if(p < threshold)
+            isSplitterGood = false;
+        else
+            isSplitterGood = true;
+    });
 }
 
 MainWindow::~MainWindow()
@@ -42,16 +54,29 @@ void MainWindow::printInfo(GenericSensor *sen)
         qDebug() << "ERROR: sensor = nullptr";
         return;
     }
+    qDebug() << "Here!";
+    infoWidget->setName(QString::fromStdString(sen->getName()));
+    infoWidget->setDesc(QString::fromStdString(sen->getDesc()));
+    infoWidget->setBounds(QString::number(sen->getMax()), QString::number(sen->getTemp()));
+    sen->accept(visitor);
+    infoWidget->setComponent(QString::fromStdString(visitor->getType()));
+
+    if(!isSplitterGood)
+    {
+        QList<int> nsz;
+        nsz << 100 << 330;
+        vert->setSizes(nsz);
+    }
 }
 
 void MainWindow::onTryNew()
 {
     AddSensor *addWidget = new AddSensor();
     addWidget->show();
-    connect(addWidget, &AddSensor::infoExists, this, &MainWindow::onInfoExists);
+    connect(addWidget, &AddSensor::infoExists, this, &MainWindow::onNewAddable);
 }
 
-void MainWindow::onInfoExists(GenericSensor *sen)
+void MainWindow::onNewAddable(GenericSensor *sen)
 {
     if(MainWindow::list->addSensor(sen))
         listWidget->newButton(sen, visitor);

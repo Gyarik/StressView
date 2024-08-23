@@ -7,6 +7,7 @@
 #include "../view/sensorlistwidget.h"
 #include "../view/addsensor.h"
 #include "../view/errorwindow.h"
+#include "../view/sensorinfowidget.h"
 
 namespace Ui
 {
@@ -22,8 +23,11 @@ private:
     static SensorContainer *list;
     static Visitor *visitor;
     SensorListWidget *listWidget;
+    SensorInfoWidget *infoWidget;
     QSplitter *hor;
     QSplitter *vert;
+    bool isSplitterGood = false;
+    int threshold = 180;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -33,7 +37,7 @@ public:
 private slots:
     void printInfo(GenericSensor *);
     void onTryNew();
-    void onInfoExists(GenericSensor *);
+    void onNewAddable(GenericSensor *);
 };
 
 #endif

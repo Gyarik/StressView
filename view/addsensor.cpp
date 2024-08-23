@@ -41,8 +41,10 @@ void AddSensor::setRanges(int min, int max, int tempmin, int tempmax)
 
 bool AddSensor::isInRange() const
 {
-    int maxtest = ui->MaxInput->text().toInt();
-    int temptest = ui->TempInput->text().toInt();
+    int maxtest = (ui->MaxInput->text().isEmpty()) ?
+                      (ui->MaxInput->placeholderText().toInt()) : (ui->MaxInput->text().toInt());
+    int temptest = (ui->TempInput->text().isEmpty()) ?
+                       (ui->TempInput->placeholderText().toInt()) : (ui->TempInput->text().toInt());
     if(maxtest > r_max || maxtest < r_min || temptest > r_tempmax || temptest < r_tempmin)
         return false;
     return true;
@@ -145,6 +147,8 @@ void AddSensor::on_NewSensorButton_clicked()
                     new RAMSensor(ui->NameInput->text().toStdString(), ui->DescInput->text().toStdString(), max.toInt() * 1024, temp.toInt());
                 emit infoExists(createdSensor);
             }
+
+            close();
         }
         else
         {
