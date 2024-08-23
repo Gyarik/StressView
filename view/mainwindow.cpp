@@ -21,8 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     vert->addWidget(infoWidget);
     hor->addWidget(listWidget);
     hor->addWidget(vert);
-    hor->setHandleWidth(10);
-    vert->setHandleWidth(10);
+    // hor->setHandleWidth(10);
+    // vert->setHandleWidth(10);
 
     QList<int> sz;
     sz << 100 << 330;
@@ -60,6 +60,7 @@ void MainWindow::printInfo(GenericSensor *sen)
     infoWidget->setBounds(QString::number(sen->getMax()), QString::number(sen->getTemp()));
     sen->accept(visitor);
     infoWidget->setComponent(QString::fromStdString(visitor->getType()));
+    infoWidget->clearWidget();
 
     if(!isSplitterGood)
     {

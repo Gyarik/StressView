@@ -52,3 +52,13 @@ QVBoxLayout *SensorInfoWidget::getChart()
 {
     return ui->chartLayout;
 }
+
+void SensorInfoWidget::clearWidget()
+{
+    QLayoutItem *i;
+    while((i = ui->chartLayout->takeAt(0)) != nullptr)
+    {
+        delete i->widget();
+        delete i;
+    }
+}
