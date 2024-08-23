@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     vert->setOrientation(Qt::Vertical);
     vert->addWidget(infoWidget);
     hor->addWidget(listWidget);
+    hor->addWidget(vert);
     hor->setHandleWidth(10);
     vert->setHandleWidth(10);
 
@@ -54,7 +55,6 @@ void MainWindow::printInfo(GenericSensor *sen)
         qDebug() << "ERROR: sensor = nullptr";
         return;
     }
-    qDebug() << "Here!";
     infoWidget->setName(QString::fromStdString(sen->getName()));
     infoWidget->setDesc(QString::fromStdString(sen->getDesc()));
     infoWidget->setBounds(QString::number(sen->getMax()), QString::number(sen->getTemp()));
