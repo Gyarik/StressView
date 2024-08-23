@@ -58,10 +58,10 @@ void ModifySensor::on_ConfirmButton_clicked()
 void ModifySensor::onCanEdit()
 {
     string prev = sensor->getName();
-    sensor->setName(ui->NameInput->text().toStdString());
-    sensor->setDesc(ui->DescInput->text().toStdString());
-    sensor->setMax(ui->MaxInput->text().toInt());
-    sensor->setTemp(ui->TempInput->text().toInt());
+    sensor->setName(QString(ui->NameInput->text()).toStdString());
+    sensor->setDesc(QString(ui->DescInput->text()).toStdString());
+    sensor->setMax(QString(ui->MaxInput->text()).toInt());
+    sensor->setTemp(QString(ui->TempInput->text()).toInt());
     emit refreshInfo(sensor, prev);
     close();
 }
