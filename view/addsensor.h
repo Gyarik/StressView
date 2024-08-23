@@ -19,10 +19,14 @@ class AddSensor : public QDialog
 
 private:
     Ui::AddSensor *ui;
+    int r_min, r_max, r_tempmin, r_tempmax;
+    QString s_maxrange, s_temprange;
 
 public:
     explicit AddSensor(QWidget *parent = nullptr);
     ~AddSensor();
+    void setRanges(int, int, int, int);
+    bool isInRange() const;
 
 signals:
     void infoExists(GenericSensor *);
