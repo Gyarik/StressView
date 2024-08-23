@@ -12,27 +12,29 @@ MainWindow::MainWindow(QWidget *parent)
     listWidget = new SensorListWidget(this);
     infoWidget = new SensorInfoWidget(this);
 
-    hor = new QSplitter;
-    vert = new QSplitter;
+    vertSplit = new QSplitter;
+    horSplit = new QSplitter;
 
-    hor->setChildrenCollapsible(false);
-    vert->setChildrenCollapsible(false);
-    vert->setOrientation(Qt::Vertical);
-    vert->addWidget(infoWidget);
-    hor->addWidget(listWidget);
-    hor->addWidget(vert);
-    // hor->setHandleWidth(10);
-    // vert->setHandleWidth(10);
+    vertSplit->setChildrenCollapsible(false);
+    horSplit->setChildrenCollapsible(false);
+    horSplit->setOrientation(Qt::Vertical);
+    vertSplit->addWidget(horSplit);
+    horSplit->addWidget(infoWidget);
+    vertSplit->addWidget(listWidget);
+    // vertSplit->setHandleWidth(10);
+    // horSplit->setHandleWidth(10);
 
     QList<int> sz;
     sz << 100 << 330;
-    vert->setSizes(sz);
-    this->setCentralWidget(hor);
+    vertSplit->setSizes(sz);
+    this->setCentralWidget(vertSplit);
 
     connect(listWidget, &SensorListWidget::nameCpy, this, &MainWindow::printInfo);
     connect(listWidget, &SensorListWidget::tryNew, this, &MainWindow::onTryNew);
+    connect(listWidget, &SensorListWidget::removedSensor, this, &MainWindow::onRemovedSensor);
+    connect(listWidget, &SensorListWidget::clearedList, this, &MainWindow::onClearedList);
 
-    connect(vert, &QSplitter::splitterMoved, this, [this](int p)
+    connect(vertSplit, &QSplitter::splitterMoved, this, [this](int p)
     {
         if(p < threshold)
             isSplitterGood = false;
@@ -60,13 +62,12 @@ void MainWindow::printInfo(GenericSensor *sen)
     infoWidget->setBounds(QString::number(sen->getMax()), QString::number(sen->getTemp()));
     sen->accept(visitor);
     infoWidget->setComponent(QString::fromStdString(visitor->getType()));
-    infoWidget->clearWidget();
 
     if(!isSplitterGood)
     {
         QList<int> nsz;
         nsz << 100 << 330;
-        vert->setSizes(nsz);
+        vertSplit->setSizes(nsz);
     }
 }
 
@@ -86,4 +87,17 @@ void MainWindow::onNewAddable(GenericSensor *sen)
         ErrorWindow *Error = new ErrorWindow("Cannot create sensor: Name already in use", this);
         Error->show();
     }
+}
+
+void MainWindow::onRemovedSensor()
+{
+    listWidget->setCurrent(nullptr);
+    infoWidget->resetFields();
+}
+
+void MainWindow::onClearedList()
+{
+    listWidget->setCurrent(nullptr);
+    list->emptyContainer();
+    infoWidget->resetFields();
 }

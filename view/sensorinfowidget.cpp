@@ -48,17 +48,11 @@ void SensorInfoWidget::setBounds(const QString &max, const QString &temp)
     ui->TempField->setText(temp);
 }
 
-QVBoxLayout *SensorInfoWidget::getChart()
+void SensorInfoWidget::resetFields()
 {
-    return ui->chartLayout;
-}
-
-void SensorInfoWidget::clearWidget()
-{
-    QLayoutItem *i;
-    while((i = ui->chartLayout->takeAt(0)) != nullptr)
-    {
-        delete i->widget();
-        delete i;
-    }
+    ui->NameField->clear();
+    ui->DescField->clear();
+    ui->TypeField->clear();
+    ui->MaxField->clear();
+    ui->TempField->clear();
 }

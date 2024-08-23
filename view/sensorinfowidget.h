@@ -21,8 +21,7 @@ public:
     void setDesc(const QString &);
     void setComponent(const QString &);
     void setBounds(const QString &, const QString &);
-    QVBoxLayout *getChart();
-    void clearWidget();
+    void resetFields();
 
 signals:
     void beginSim();

@@ -21,6 +21,7 @@ SOURCES += \
     view/addsensor.cpp \
     view/errorwindow.cpp \
     view/mainwindow.cpp \
+    view/modifysensor.cpp \
     view/sensorinfowidget.cpp \
     view/sensorlistwidget.cpp \
     visitor/genericvisitor.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     view/addsensor.h \
     view/errorwindow.h \
     view/mainwindow.h \
+    view/modifysensor.h \
     view/sensorinfowidget.h \
     view/sensorlistwidget.h \
     visitor/genericvisitor.h \
@@ -47,5 +49,6 @@ FORMS += \
     view/addsensor.ui \
     view/errorwindow.ui \
     view/mainwindow.ui \
+    view/modifysensor.ui \
     view/sensorinfowidget.ui \
     view/sensorlistwidget.ui

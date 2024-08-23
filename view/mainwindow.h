@@ -24,8 +24,8 @@ private:
     static Visitor *visitor;
     SensorListWidget *listWidget;
     SensorInfoWidget *infoWidget;
-    QSplitter *hor;
-    QSplitter *vert;
+    QSplitter *vertSplit;
+    QSplitter *horSplit;
     bool isSplitterGood = false;
     int threshold = 180;
 
@@ -38,6 +38,8 @@ private slots:
     void printInfo(GenericSensor *);
     void onTryNew();
     void onNewAddable(GenericSensor *);
+    void onRemovedSensor();
+    void onClearedList();
 };
 
 #endif
