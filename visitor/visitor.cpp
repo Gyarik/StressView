@@ -29,6 +29,11 @@ QPushButton *Visitor::getButton() const
     return this->m_btn;
 }
 
+string Visitor::getChartUnit() const
+{
+    return this->m_unit;
+}
+
 void Visitor::listButton(const CPUSensor *sensor)
 {
     QPushButton *btn = new QPushButton();
@@ -69,4 +74,19 @@ void Visitor::listButton(const RAMSensor *sensor)
     txt->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
     btn->layout()->addWidget(txt);
     this->m_btn = btn;
+}
+
+void Visitor::setChartUnit(const CPUSensor *sensor)
+{
+    this->m_unit = "GHz";
+}
+
+void Visitor::setChartUnit(const GPUSensor *sensor)
+{
+    this->m_unit = "MHz";
+}
+
+void Visitor::setChartUnit(const RAMSensor *sensor)
+{
+    this->m_unit = "MiB";
 }

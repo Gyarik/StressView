@@ -19,10 +19,15 @@ public:
 
     virtual string getType() const = 0;
     virtual QPushButton *getButton() const = 0;
+    virtual string getChartUnit() const = 0;
 
     virtual void listButton(const CPUSensor *) = 0;
     virtual void listButton(const GPUSensor *) = 0;
     virtual void listButton(const RAMSensor *) = 0;
+
+    virtual void setChartUnit(const CPUSensor *) = 0;
+    virtual void setChartUnit(const GPUSensor *) = 0;
+    virtual void setChartUnit(const RAMSensor *) = 0;
 };
 
 #endif
