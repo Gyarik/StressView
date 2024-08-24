@@ -32,8 +32,7 @@ public slots:
 
 signals:
     void changeSensor();
-    void sameName();
     void refreshInfo(GenericSensor *, const string &);
 };
 
-#endif // MODIFYSENSOR_H
+#endif

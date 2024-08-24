@@ -21,8 +21,6 @@ ModifySensor::ModifySensor(GenericSensor *sen, QWidget *parent)
     ui->TempInput->setValidator(validnum);
     ui->MaxInput->setMaxLength(5);
     ui->TempInput->setMaxLength(3);
-
-    connect(this, &ModifySensor::sameName, this, &ModifySensor::onCanEdit);
 }
 
 ModifySensor::~ModifySensor()
@@ -49,8 +47,6 @@ void ModifySensor::on_ConfirmButton_clicked()
         ErrorWindow *Error = new ErrorWindow("Name cannot be empty");
         Error->show();
     }
-    else if(ui->NameInput->text().toStdString() == sensor->getName())
-        emit sameName();
     else
         emit changeSensor();
 }

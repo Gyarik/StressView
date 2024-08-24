@@ -123,11 +123,11 @@ void MainWindow::onEditSensor()
 void MainWindow::onChangeSensor()
 {
     string cur = editWidget->getName();
-    if(MainWindow::list->isEqual(cur, prevName))
+    if(!MainWindow::list->isEqual(cur, prevName))
         emit canEdit();
     else
     {
-        ErrorWindow *Error = new ErrorWindow("Another sensor with the same name exists");
+        ErrorWindow *Error = new ErrorWindow("Sensor with the same name already exists");
         Error->show();
     }
 }

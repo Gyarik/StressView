@@ -69,7 +69,7 @@ bool SensorContainer::isEqual(const string &newS, const string &oldS) const
     for(const auto &sensor : SensorContainer::m_cont)
     {
         if(sensor->getName() == newS && sensor->getName() != oldS)
-            return false;
+            return true;
     }
-    return true;
+    return false;
 }
