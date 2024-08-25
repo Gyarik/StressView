@@ -11,6 +11,7 @@ public:
 
     virtual void accept(GenericVisitor *) const override;
     virtual void setupButton(GenericVisitor *) const override;
+    virtual void setChartUnit(GenericVisitor *) const override;
 };
 
 #endif

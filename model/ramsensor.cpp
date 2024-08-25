@@ -1,6 +1,5 @@
 #include "ramsensor.h"
 #include "../visitor/genericvisitor.h"
-#include "../model/pointinfo/pointinfoint.h"
 
 RAMSensor::RAMSensor(const string &name, const string &desc, int max, int temp)
     : GenericSensor::GenericSensor(name, desc, max, temp) {}
@@ -10,7 +9,7 @@ RAMSensor::~RAMSensor() {}
 void RAMSensor::populate()
 {
     // Delete all data before creating new simulation
-    this->deleteData();
+    m_data.clear();
 
     // Declare variables and create first value
     const int maxVal = getMax();
@@ -23,6 +22,7 @@ void RAMSensor::populate()
     int curTemp = rand() % (randMaxInt - randMinInt + 1) + randMinInt;
     int firstVal = curVal;
     bool bad = false;
+    m_data.push_back(PointInfo(firstVal, 0, curTemp, bad));
 
     for(int i = 0; i < 20; ++i)
     {
@@ -48,7 +48,7 @@ void RAMSensor::populate()
 
         bad = curVal >= (0.95f * maxVal);
 
-        m_data.push_back(new PointInfoInt(curVal, i+1, curTemp, bad));
+        m_data.push_back(PointInfo(curVal, i+1, curTemp, bad));
     }
 }
 
@@ -60,4 +60,9 @@ void RAMSensor::accept(GenericVisitor *visitor) const
 void RAMSensor::setupButton(GenericVisitor *visitor) const
 {
     return visitor->listButton(this);
+}
+
+void RAMSensor::setChartUnit(GenericVisitor *visitor) const
+{
+    return visitor->setChartUnit(this);
 }

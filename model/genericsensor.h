@@ -18,7 +18,7 @@ private:
     int m_max, m_temp;
 
 protected:
-    vector<PointInfo*> m_data;
+    vector<PointInfo> m_data;
 
 public:
     GenericSensor(const string & = "untitled", const string & = "", int = 0, int = 80);
@@ -29,14 +29,15 @@ public:
     int getMax() const;
     int getTemp() const;
     int getCount() const;
+    PointInfo getData(int) const;
     void setName(const string &);
     void setDesc(const string &);
     void setMax(int);
     void setTemp(int);
-    void deleteData();
 
     virtual void accept(GenericVisitor *) const = 0;
     virtual void setupButton(GenericVisitor *) const = 0;
+    virtual void setChartUnit(GenericVisitor *) const = 0;
 };
 
 #endif

@@ -9,6 +9,7 @@
 #include "../view/errorwindow.h"
 #include "../view/sensorinfowidget.h"
 #include "../view/modifysensor.h"
+#include "../view/sensorchartwidget.h"
 
 namespace Ui
 {
@@ -26,6 +27,7 @@ private:
     SensorListWidget *listWidget;
     SensorInfoWidget *infoWidget;
     ModifySensor *editWidget;
+    SensorChartWidget *chartWidget;
     QSplitter *vertSplit;
     QSplitter *horSplit;
     bool isSplitterGood = false;
@@ -46,6 +48,7 @@ private slots:
     void onNewAddable(GenericSensor *);
     void onRemovedSensor();
     void onClearedList();
+    void onBeginSim();
     void onEditSensor();
     //void onClearSensor();
     void onChangeSensor();

@@ -1,9 +1,12 @@
 #include "pointinfo.h"
 
-PointInfo::PointInfo(int time, int curtemp, bool bad)
-    : m_time(time), m_curtemp(curtemp), m_bad(bad) {}
+PointInfo::PointInfo(int val, int time, int curtemp, bool bad)
+    : m_val(val), m_time(time), m_curtemp(curtemp), m_bad(bad) {}
 
-PointInfo::~PointInfo() {}
+int PointInfo::getVal() const
+{
+    return m_val;
+}
 
 int PointInfo::getTime() const
 {

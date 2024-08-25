@@ -14,8 +14,6 @@ SOURCES += \
     model/genericsensor.cpp \
     model/gpusensor.cpp \
     model/pointinfo/pointinfo.cpp \
-    model/pointinfo/pointinfofloat.cpp \
-    model/pointinfo/pointinfoint.cpp \
     model/ramsensor.cpp \
     model/sensorcontainer.cpp \
     view/addsensor.cpp \
@@ -33,8 +31,6 @@ HEADERS += \
     model/genericsensor.h \
     model/gpusensor.h \
     model/pointinfo/pointinfo.h \
-    model/pointinfo/pointinfofloat.h \
-    model/pointinfo/pointinfoint.h \
     model/ramsensor.h \
     model/sensorcontainer.h \
     view/addsensor.h \

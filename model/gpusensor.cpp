@@ -1,6 +1,5 @@
 #include "gpusensor.h"
 #include "../visitor/genericvisitor.h"
-#include "../model/pointinfo/pointinfoint.h"
 
 GPUSensor::GPUSensor(const string &name, const string &desc, int max, int temp)
     : GenericSensor::GenericSensor(name, desc, max, temp) {}
@@ -10,7 +9,7 @@ GPUSensor::~GPUSensor() {}
 void GPUSensor::populate()
 {
     // Delete all data before creating new simulation
-    this->deleteData();
+    m_data.clear();
 
     // Declare variables and create first value
     const int maxVal = getMax();
@@ -24,6 +23,7 @@ void GPUSensor::populate()
     int prevVal = curVal;
     int firstVal = curVal;
     bool bad = false;
+    m_data.push_back(PointInfo(firstVal, 0, curTemp, bad));
 
     for(int i = 0; i < 20; ++i)
     {
@@ -51,9 +51,9 @@ void GPUSensor::populate()
         }
         curVal = rand() % (randMaxInt - randMinInt + 1) + randMinInt;
 
-        bad = curVal <= (0.5f * firstVal);
+        bad = curVal <= (int)(0.5f * firstVal);
 
-        m_data.push_back(new PointInfoInt(curVal, i+1, curTemp, bad));
+        m_data.push_back(PointInfo(curVal, i+1, curTemp, bad));
     }
 }
 
@@ -67,3 +67,7 @@ void GPUSensor::setupButton(GenericVisitor *visitor) const
     return visitor->listButton(this);
 }
 
+void GPUSensor::setChartUnit(GenericVisitor *visitor) const
+{
+    return visitor->setChartUnit(this);
+}

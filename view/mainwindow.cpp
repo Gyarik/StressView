@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle(QString::fromStdString("StressView"));
     listWidget = new SensorListWidget(this);
     infoWidget = new SensorInfoWidget(this);
+    chartWidget = new SensorChartWidget(this);
 
     vertSplit = new QSplitter;
     horSplit = new QSplitter;
@@ -19,14 +20,15 @@ MainWindow::MainWindow(QWidget *parent)
     horSplit->setChildrenCollapsible(false);
     horSplit->setOrientation(Qt::Vertical);
     vertSplit->addWidget(horSplit);
+    horSplit->addWidget(chartWidget);
     horSplit->addWidget(infoWidget);
     vertSplit->addWidget(listWidget);
-    // vertSplit->setHandleWidth(10);
-    // horSplit->setHandleWidth(10);
+    vertSplit->setHandleWidth(0);
+    horSplit->setHandleWidth(10);
 
     QList<int> sz;
-    sz << 100 << 330;
-    vertSplit->setSizes(sz);
+    sz << 330 << 100;
+    horSplit->setSizes(sz);
     this->setCentralWidget(vertSplit);
 
     connect(listWidget, &SensorListWidget::nameCpy, this, &MainWindow::printInfo);
@@ -35,9 +37,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(listWidget, &SensorListWidget::clearedList, this, &MainWindow::onClearedList);
 
     connect(infoWidget, &SensorInfoWidget::editSensor, this, &MainWindow::onEditSensor);
+    connect(infoWidget, &SensorInfoWidget::beginSim, this, &MainWindow::onBeginSim);
     //connect(infoWidget, &SensorInfoWidget::clearSensor, this, &MainWindow::onClearSensor());
 
-    connect(vertSplit, &QSplitter::splitterMoved, this, [this](int p)
+    connect(horSplit, &QSplitter::splitterMoved, this, [this](int p)
     {
         if(p < threshold)
             isSplitterGood = false;
@@ -65,13 +68,6 @@ void MainWindow::printInfo(GenericSensor *sen)
     infoWidget->setBounds(QString::number(sen->getMax()), QString::number(sen->getTemp()));
     sen->accept(visitor);
     infoWidget->setComponent(QString::fromStdString(visitor->getType()));
-
-    if(!isSplitterGood)
-    {
-        QList<int> nsz;
-        nsz << 100 << 330;
-        vertSplit->setSizes(nsz);
-    }
 }
 
 void MainWindow::onTryNew()
@@ -103,6 +99,22 @@ void MainWindow::onClearedList()
     listWidget->setCurrent(nullptr);
     list->emptyContainer();
     infoWidget->resetFields();
+}
+
+void MainWindow::onBeginSim()
+{
+    if(listWidget->getCurrent() != nullptr)
+    {
+        listWidget->getCurrent()->populate();
+        chartWidget->showChart(listWidget->getCurrent());
+
+        if(!isSplitterGood)
+        {
+            QList<int> nsz;
+            nsz << 330 << 100;
+            horSplit->setSizes(nsz);
+        }
+    }
 }
 
 void MainWindow::onEditSensor()

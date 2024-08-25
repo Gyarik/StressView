@@ -7,16 +7,19 @@ Visitor::~Visitor() {}
 void Visitor::visit(const CPUSensor *sensor)
 {
     this->m_type = "CPU";
+    setChartUnit(sensor);
 }
 
 void Visitor::visit(const GPUSensor *sensor)
 {
     this->m_type = "GPU";
+    setChartUnit(sensor);
 }
 
 void Visitor::visit(const RAMSensor *sensor)
 {
     this->m_type = "RAM";
+    setChartUnit(sensor);
 }
 
 string Visitor::getType() const
@@ -78,7 +81,7 @@ void Visitor::listButton(const RAMSensor *sensor)
 
 void Visitor::setChartUnit(const CPUSensor *sensor)
 {
-    this->m_unit = "GHz";
+    this->m_unit = "MHz";
 }
 
 void Visitor::setChartUnit(const GPUSensor *sensor)
