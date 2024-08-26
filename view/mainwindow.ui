@@ -42,9 +42,21 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionLoad"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
+  <action name="actionSave">
+   <property name="text">
+    <string>&amp;Save Sensors</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>&amp;Load Sensors</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
