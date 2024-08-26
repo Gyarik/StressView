@@ -35,7 +35,7 @@ public:
     void setMax(int);
     void setTemp(int);
     void clearData();
-
+    void insertInfo(int, int, bool);
 
     virtual void accept(GenericVisitor *) const = 0;
     virtual void setupButton(GenericVisitor *) const = 0;

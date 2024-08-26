@@ -38,6 +38,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void newButton();
+    GenericSensor *newSensor(const string &, const string &, const string &, int, int) const;
+    GenericSensor *convertJson(const QJsonObject &) const;
+    void saveList(const vector<GenericSensor *> &, const QString &) const;
+    vector<GenericSensor *> loadList(const QString &);
 
 signals:
     void canEdit();
@@ -53,6 +57,9 @@ private slots:
     void onClearSensor();
     void onChangeSensor();
     void onRefreshInfo(const GenericSensor *, const string &);
+    void onCurChange();
+    void onSave();
+    void onLoad();
 };
 
 #endif

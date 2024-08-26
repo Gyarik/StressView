@@ -17,6 +17,7 @@ public:
     // Container related methods
     static void emptyContainer();
     static const vector<GenericSensor *> & getContainer();
+    static void copySensors(const vector<GenericSensor *> &);
 
     // Sensor related methods
     bool addSensor(GenericSensor *);

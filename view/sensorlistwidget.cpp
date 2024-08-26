@@ -63,6 +63,17 @@ void SensorListWidget::changeButton(const string &curName, const string &prevNam
     }
 }
 
+void SensorListWidget::fileClearList()
+{
+    for(auto it = buttons.begin(); it != buttons.end(); ++it)
+    {
+        delete *it;
+    }
+    buttons.clear();
+
+    emit clearedList();
+}
+
 // Slots
 
 void SensorListWidget::searchBtn(const QString &s)

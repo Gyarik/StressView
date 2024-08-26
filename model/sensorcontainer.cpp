@@ -15,6 +15,12 @@ const vector<GenericSensor *> & SensorContainer::getContainer()
     return m_cont;
 }
 
+void SensorContainer::copySensors(const vector<GenericSensor *> &v)
+{
+    emptyContainer();
+    m_cont = v;
+}
+
 bool SensorContainer::addSensor(GenericSensor *sen)
 {
 

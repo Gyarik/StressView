@@ -59,3 +59,8 @@ void GenericSensor::clearData()
 {
     m_data.clear();
 }
+
+void GenericSensor::insertInfo(int val, int timestamp, bool bad)
+{
+    m_data.push_back(PointInfo(val, timestamp, bad));
+}

@@ -49,12 +49,12 @@
   </widget>
   <action name="actionSave">
    <property name="text">
-    <string>&amp;Save Sensors</string>
+    <string>&amp;Save List</string>
    </property>
   </action>
   <action name="actionLoad">
    <property name="text">
-    <string>&amp;Load Sensors</string>
+    <string>&amp;Load List</string>
    </property>
   </action>
  </widget>

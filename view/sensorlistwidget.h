@@ -33,6 +33,7 @@ public:
     GenericSensor *getCurrent() const;
     void newButton(GenericSensor *, GenericVisitor *);
     void changeButton(const string &, const string &);
+    void fileClearList();
 
 signals:
     void curSensorChange();
