@@ -39,8 +39,8 @@ void GPUSensor::populate()
             randMaxInt = prevVal + (int)(0.01f * prevVal);
             curTemp = rand() % (maxTemp - (int)(0.95f * prevTemp) + 1) + (int)(0.95f * prevTemp);
         }
-        // If temperature is over 100C, 80% chance to generate bad number
-        else if(curTemp >= 100 && rand() % 100 + 1 <= 80)
+        // If temperature is over 100C, 40% chance to generate bad number
+        else if(curTemp >= 100 && rand() % 100 + 1 <= 40)
         {
             randMinInt = (int)(0.3f * firstVal);
             randMaxInt = (int)(0.5f * firstVal);

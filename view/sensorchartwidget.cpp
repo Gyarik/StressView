@@ -41,7 +41,7 @@ void SensorChartWidget::showChart(const GenericSensor *sensor)
         confBad[QXYSeries::PointConfiguration::Color] = QColor(Qt::red);
         confBad[QXYSeries::PointConfiguration::LabelVisibility] = true;
         QHash<QXYSeries::PointConfiguration, QVariant> confGood;
-        confGood[QXYSeries::PointConfiguration::Color] = QColor(119, 255, 51);
+        confGood[QXYSeries::PointConfiguration::Color] = QColor(0, 200, 0);
         confGood[QXYSeries::PointConfiguration::LabelVisibility] = false;
 
         sensor->accept(visitor);
@@ -57,7 +57,9 @@ void SensorChartWidget::showChart(const GenericSensor *sensor)
         }
 
         auto X = new QValueAxis;
-        X->setTickCount(21);
+        // X->setTickCount(sensor->getCount());
+        X->setRange(0, sensor->getCount() - 1);
+        X->setTickCount(sensor->getCount());
         X->setTitleText("(seconds)");
         X->setLabelFormat("%i");
         chart->chart()->addAxis(X, Qt::AlignBottom);
@@ -66,7 +68,7 @@ void SensorChartWidget::showChart(const GenericSensor *sensor)
 
         auto Y = new QValueAxis;
         Y->setTitleText("(" + unit + ")");
-        Y->setRange(0, sensor->getMax());
+        Y->setRange(0, sensor->getMax() + 100);
         Y->setLabelFormat("%i");
         Y->setLinePenColor(s->pen().color());
         chart->chart()->addAxis(Y, Qt::AlignLeft);
