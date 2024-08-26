@@ -48,7 +48,7 @@ void SensorChartWidget::showChart(const GenericSensor *sensor)
         QString unit = QString::fromStdString(visitor->getChartUnit());
         for(int i = 0; i < sensor->getCount(); ++i)
         {
-            qDebug() << sensor->getData(i).isBad();
+            // qDebug() << sensor->getData(i).isBad();
             s->append(sensor->getData(i).getTime(), sensor->getData(i).getVal());
             if(sensor->getData(i).isBad())
                 s->setPointConfiguration(i, confBad);
@@ -79,4 +79,33 @@ void SensorChartWidget::showChart(const GenericSensor *sensor)
     }
 
     delete visitor;
+}
+
+void SensorChartWidget::resetChart()
+{
+    QLineSeries *nothing = new QLineSeries();
+
+    chart->chart()->removeAllSeries();
+    while(!chart->chart()->axes().isEmpty())
+    {
+        chart->chart()->removeAxis(chart->chart()->axes().takeFirst());
+    }
+
+    chart->chart()->legend()->hide();
+    chart->chart()->setTitle("Performance");
+    chart->chart()->setTitleBrush(QBrush(Qt::black));
+
+    auto X = new QValueAxis;
+    X->setTickCount(21);
+    chart->chart()->addAxis(X, Qt::AlignBottom);
+    chart->chart()->addSeries(nothing);
+    X->setLinePenColor(Qt::black);
+
+    auto Y = new QValueAxis;
+    Y->setLinePenColor(nothing->pen().color());
+    chart->chart()->addAxis(Y, Qt::AlignLeft);
+    Y->setLinePenColor(Qt::black);
+
+    nothing->attachAxis(X);
+    nothing->attachAxis(Y);
 }

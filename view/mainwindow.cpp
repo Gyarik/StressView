@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(infoWidget, &SensorInfoWidget::editSensor, this, &MainWindow::onEditSensor);
     connect(infoWidget, &SensorInfoWidget::beginSim, this, &MainWindow::onBeginSim);
-    //connect(infoWidget, &SensorInfoWidget::clearSensor, this, &MainWindow::onClearSensor());
+    connect(infoWidget, &SensorInfoWidget::clearSensor, this, &MainWindow::onClearSensor);
 
     connect(horSplit, &QSplitter::splitterMoved, this, [this](int p)
     {
@@ -92,6 +92,7 @@ void MainWindow::onRemovedSensor()
 {
     listWidget->setCurrent(nullptr);
     infoWidget->resetFields();
+    chartWidget->resetChart();
 }
 
 void MainWindow::onClearedList()
@@ -99,6 +100,7 @@ void MainWindow::onClearedList()
     listWidget->setCurrent(nullptr);
     list->emptyContainer();
     infoWidget->resetFields();
+    chartWidget->resetChart();
 }
 
 void MainWindow::onBeginSim()
@@ -129,6 +131,15 @@ void MainWindow::onEditSensor()
         connect(editWidget, &ModifySensor::changeSensor, this, &MainWindow::onChangeSensor);
         connect(this, &MainWindow::canEdit, editWidget, &ModifySensor::onCanEdit);
         connect(editWidget, &ModifySensor::refreshInfo, this, &MainWindow::onRefreshInfo);
+    }
+}
+
+void MainWindow::onClearSensor()
+{
+    if(listWidget->getCurrent() != nullptr)
+    {
+        listWidget->getCurrent()->clearData();
+        chartWidget->resetChart();
     }
 }
 

@@ -34,6 +34,8 @@ public:
     void setDesc(const string &);
     void setMax(int);
     void setTemp(int);
+    void clearData();
+
 
     virtual void accept(GenericVisitor *) const = 0;
     virtual void setupButton(GenericVisitor *) const = 0;

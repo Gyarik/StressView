@@ -50,7 +50,7 @@ private slots:
     void onClearedList();
     void onBeginSim();
     void onEditSensor();
-    //void onClearSensor();
+    void onClearSensor();
     void onChangeSensor();
     void onRefreshInfo(const GenericSensor *, const string &);
 };

@@ -54,3 +54,8 @@ void GenericSensor::setTemp(int temp)
 {
     this->m_temp = temp;
 }
+
+void GenericSensor::clearData()
+{
+    m_data.clear();
+}
