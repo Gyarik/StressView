@@ -14,8 +14,8 @@ void RAMSensor::populate()
     // Declare variables and create first value
     const int maxVal = getMax();
     const int maxTemp = getTemp();
-    int randMinInt = (int)(0.5f * maxVal);
-    int randMaxInt = maxVal - (int)(0.8f * maxVal);
+    int randMinInt = (int)(0.01f * maxVal);
+    int randMaxInt = (int)(0.03f * maxVal);
     int curVal = rand() % (randMaxInt - randMinInt + 1) + randMinInt;
     randMinInt = (int)(0.5f * maxTemp);
     randMaxInt = maxTemp - (int)(0.7f * maxTemp);

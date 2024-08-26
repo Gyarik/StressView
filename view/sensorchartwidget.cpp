@@ -41,7 +41,7 @@ void SensorChartWidget::showChart(const GenericSensor *sensor)
         confBad[QXYSeries::PointConfiguration::Color] = QColor(Qt::red);
         confBad[QXYSeries::PointConfiguration::LabelVisibility] = true;
         QHash<QXYSeries::PointConfiguration, QVariant> confGood;
-        confGood[QXYSeries::PointConfiguration::Color] = QColor(Qt::green);
+        confGood[QXYSeries::PointConfiguration::Color] = QColor(119, 255, 51);
         confGood[QXYSeries::PointConfiguration::LabelVisibility] = false;
 
         sensor->accept(visitor);

@@ -20,7 +20,7 @@ void CPUSensor::populate()
     int curTemp = maxTemp - (int)(maxTemp * 0.2f);
     m_data.push_back(PointInfo(firstVal, 0, curTemp, false));
     bool bad = false;
-    int randMinTemp = curTemp - (int)(0.1f * curTemp);
+    int randMinTemp = curTemp - (int)(0.4f * curTemp);
     int randMin = 0;
     int randMax = 100;
 
@@ -36,12 +36,12 @@ void CPUSensor::populate()
             // 0.5f * firstVal, 0.7f * firstVal
             randMin = (int)(0.5f * firstVal);
             randMax = (int)(0.7f * firstVal);
-            curVal = firstVal - rand() % (randMax - randMin + 1) + randMin;
+            curVal = rand() % (randMax - randMin + 1) + randMin;
         }
         // otherwise generate normally
         else
         {
-            randMin = firstVal - (int)(0.1f * firstVal);
+            randMin = firstVal - (int)(0.07f * firstVal);
             curVal = rand() % (maxVal - randMin + 1) + randMin;
         }
 
