@@ -9,6 +9,7 @@ SensorChartWidget::SensorChartWidget(QWidget *parent)
     chart = new QChartView();
     this->showChart(nullptr);
     ui->chartLayout->addWidget(chart);
+    chart->setRenderHint(QPainter::Antialiasing);
 }
 
 SensorChartWidget::~SensorChartWidget()
@@ -34,6 +35,14 @@ void SensorChartWidget::showChart(const GenericSensor *sensor)
         QLineSeries *s = new QLineSeries();
         s->setPen(QPen(Qt::black, 2));
         s->setPointsVisible(true);
+        s->setPointLabelsFormat("DROP");
+        s->setPointLabelsColor(QColor(Qt::red));
+        QHash<QXYSeries::PointConfiguration, QVariant> confBad;
+        confBad[QXYSeries::PointConfiguration::Color] = QColor(Qt::red);
+        confBad[QXYSeries::PointConfiguration::LabelVisibility] = true;
+        QHash<QXYSeries::PointConfiguration, QVariant> confGood;
+        confGood[QXYSeries::PointConfiguration::Color] = QColor(Qt::green);
+        confGood[QXYSeries::PointConfiguration::LabelVisibility] = false;
 
         sensor->accept(visitor);
         QString unit = QString::fromStdString(visitor->getChartUnit());
@@ -41,6 +50,10 @@ void SensorChartWidget::showChart(const GenericSensor *sensor)
         {
             qDebug() << sensor->getData(i).isBad();
             s->append(sensor->getData(i).getTime(), sensor->getData(i).getVal());
+            if(sensor->getData(i).isBad())
+                s->setPointConfiguration(i, confBad);
+            else
+                s->setPointConfiguration(i, confGood);
         }
 
         auto X = new QValueAxis;
