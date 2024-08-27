@@ -278,6 +278,7 @@ void MainWindow::onRefreshInfo(const GenericSensor *sen, const string &prev)
     infoWidget->setDesc(QString::fromStdString(sen->getDesc()));
     infoWidget->setBounds(QString::number(sen->getMax()), QString::number(sen->getTemp()));
     listWidget->changeButton(sen->getName(), prev);
+    chartWidget->resetChart();
 }
 
 void MainWindow::onCurChange()
