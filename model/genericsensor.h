@@ -21,8 +21,8 @@ protected:
     vector<PointInfo> m_data;
 
 public:
-    GenericSensor(const string & = "untitled", const string & = "", int = 0, int = 80);
-    virtual ~GenericSensor();
+    GenericSensor(const string & = "untitled", const string & = "", int = 50, int = 80);
+    virtual ~GenericSensor() = 0;
     virtual void populate() = 0;
     string getName() const;
     string getDesc() const;

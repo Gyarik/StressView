@@ -5,7 +5,7 @@
 class RAMSensor : public GenericSensor
 {
 public:
-    RAMSensor(const string & = "untitled", const string & = "", int = 0, int = 80);
+    RAMSensor(const string & = "untitled", const string & = "", int = 1, int = 80);
     virtual ~RAMSensor();
     virtual void populate() override;
 

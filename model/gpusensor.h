@@ -5,7 +5,7 @@
 class GPUSensor : public GenericSensor
 {
 public:
-    GPUSensor(const string & = "untitled", const string & = "", int = 0, int = 80);
+    GPUSensor(const string & = "untitled", const string & = "", int = 200, int = 80);
     virtual ~GPUSensor();
     virtual void populate() override;
 
