@@ -18,6 +18,7 @@ private:
 public:
     explicit ErrorWindow(QString msg = "error", QWidget *parent = nullptr);
     ~ErrorWindow();
+
 private slots:
     void on_ErrorConfirm_clicked();
 };

@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle(QString::fromStdString("StressView"));
+    this->setWindowIcon(QIcon(":/icons/resources/app.png"));
     listWidget = new SensorListWidget(this);
     infoWidget = new SensorInfoWidget(this);
     chartWidget = new SensorChartWidget(this);
@@ -183,7 +184,7 @@ void MainWindow::printInfo(GenericSensor *sen)
     infoWidget->setDesc(QString::fromStdString(sen->getDesc()));
     infoWidget->setBounds(QString::number(sen->getMax()), QString::number(sen->getTemp()));
     sen->accept(visitor);
-    infoWidget->setComponent(QString::fromStdString(visitor->getType()));
+    infoWidget->setComponent(QString::fromStdString(visitor->getType()), QString::fromStdString(visitor->getChartUnit()));
 }
 
 void MainWindow::onTryNew()

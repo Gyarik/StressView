@@ -19,7 +19,7 @@ public:
     ~SensorInfoWidget();
     void setName(const QString &);
     void setDesc(const QString &);
-    void setComponent(const QString &);
+    void setComponent(const QString &, const QString &);
     void setBounds(const QString &, const QString &);
     void resetFields();
 

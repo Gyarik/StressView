@@ -37,9 +37,10 @@ void SensorInfoWidget::setDesc(const QString &desc)
     ui->DescField->setText(desc);
 }
 
-void SensorInfoWidget::setComponent(const QString &comp)
+void SensorInfoWidget::setComponent(const QString &comp, const QString &unit)
 {
     ui->TypeField->setText(comp);
+    ui->TypeUnit->setText(unit);
 }
 
 void SensorInfoWidget::setBounds(const QString &max, const QString &temp)
@@ -55,4 +56,5 @@ void SensorInfoWidget::resetFields()
     ui->TypeField->clear();
     ui->MaxField->clear();
     ui->TempField->clear();
+    ui->TypeUnit->clear();
 }

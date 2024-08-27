@@ -44,6 +44,8 @@ void Visitor::listButton(const CPUSensor *sensor)
     btn->setFixedSize(QSize(225, 40));
     btn->setStyleSheet("text-align:left;");
     btn->setLayout(new QGridLayout);
+    btn->setIcon(QIcon(":/icons/resources/cpu.png"));
+    btn->setIconSize(QSize(32, 32));
 
     QLabel *txt = new QLabel(QString::fromStdString(sensor->getName()));
     txt->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
@@ -58,6 +60,8 @@ void Visitor::listButton(const GPUSensor *sensor)
     btn->setFixedSize(QSize(225, 40));
     btn->setStyleSheet("text-align:left;");
     btn->setLayout(new QGridLayout);
+    btn->setIcon(QIcon(":/icons/resources/gpu.png"));
+    btn->setIconSize(QSize(32, 32));
 
     QLabel *txt = new QLabel(QString::fromStdString(sensor->getName()));
     txt->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
@@ -72,6 +76,8 @@ void Visitor::listButton(const RAMSensor *sensor)
     btn->setFixedSize(QSize(225, 40));
     btn->setStyleSheet("text-align:left;");
     btn->setLayout(new QGridLayout);
+    btn->setIcon(QIcon(":/icons/resources/ram.png"));
+    btn->setIconSize(QSize(32, 32));
 
     QLabel *txt = new QLabel(QString::fromStdString(sensor->getName()));
     txt->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);

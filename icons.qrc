@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>resources/app.png</file>
+        <file>resources/cpu.png</file>
+        <file>resources/gpu.png</file>
+        <file>resources/ram.png</file>
+    </qresource>
+</RCC>

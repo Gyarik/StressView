@@ -6,6 +6,7 @@ AddSensor::AddSensor(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle(QString::fromStdString("Create new sensor"));
+    this->setWindowIcon(QIcon(":/icons/resources/app.png"));
     ui->NameInput->setFocus();
 
     QRegularExpression regexpName("[\\p{L}0-9]*");

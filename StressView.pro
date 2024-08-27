@@ -51,3 +51,6 @@ FORMS += \
     view/sensorchartwidget.ui \
     view/sensorinfowidget.ui \
     view/sensorlistwidget.ui
+
+RESOURCES += \
+    icons.qrc

@@ -6,6 +6,7 @@ ModifySensor::ModifySensor(GenericSensor *sen, QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle(QString::fromStdString("Edit Sensor"));
+    this->setWindowIcon(QIcon(":/icons/resources/app.png"));
 
     ui->NameInput->setText(QString::fromStdString(sensor->getName()));
     ui->DescInput->setText(QString::fromStdString(sensor->getDesc()));
