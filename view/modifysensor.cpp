@@ -29,7 +29,7 @@ ModifySensor::~ModifySensor()
     delete ui;
 }
 
-string ModifySensor::getName()
+string ModifySensor::getName() const
 {
     return ui->NameInput->text().trimmed().toStdString();
 }

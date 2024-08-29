@@ -21,7 +21,7 @@ private:
 public:
     explicit ModifySensor(GenericSensor *sen, QWidget *parent = nullptr);
     ~ModifySensor();
-    string getName();
+    string getName() const;
 
 private slots:
     void on_CancelButton_clicked();

@@ -23,4 +23,4 @@ private slots:
     void on_ErrorConfirm_clicked();
 };
 
-#endif // ERRORWINDOW_H
+#endif
