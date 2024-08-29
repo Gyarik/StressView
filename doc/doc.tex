@@ -1,10 +1,14 @@
 \documentclass[10pt]{article}
 
+\usepackage{svg, hyperref}
+\hypersetup{hidelinks}
+
 \title{StressView}
 \author{Alessio Turetta, 2008069}
 \date{}
 
 \renewcommand{\contentsname}{Indice}
+\renewcommand{\figurename}{Figura}
 
 \begin{document}
 
@@ -13,19 +17,144 @@
 \newpage
 
 \section{Introduzione}
-StressView è un programma di simulazione di performance su un generico componente
-per PC.
-I tipi di componente a disposizione sono tre dei più importanti, ascelta tra
-Processore (CPU), Schede Grafica (GPU) e Memoria (RAM).
+StressView è un'applicazione che permette la simulazione di
+performance su un generico componente per PC.
+I tipi di componente a disposizione sono tre dei più importanti, a scelta tra
+Processore (CPU), Scheda Grafica (GPU) e Memoria (RAM).
 Oltre ad offrire un grafico di andamento della performance, il programma segnala
-potenziali (soprattutto gravi) perdite rispetto all'andamento normale,
+potenziali e soprattutto gravi perdite rispetto all'andamento normale,
 le quali si presentano diversamente a seconda del componente,
-e sulla base della temperatura massima inserita da utente (la quale fluttua
-nella simulazione)
+e sulla base della temperatura massima inserita da utente (la quale varia
+durante la simulazione stessa), allo scopo di simulare il cosiddetto "thermal
+throttling", cioè la riduzione automatica di potenza per evitare il danneggiamento
+dei componenti in caso di temperature eccessive.
+\\\\
+Ho scelto questo progetto perché mi è sembrato un tema adatto per la simulazione
+di sensori e l'utilizzo di polimorfismo.
 
 \section{Modello logico}
+Il modello logico si basa principalmente sulla gestione di sensori come gerarchia
+a partire da un sensore generico che contiene maggior parte dei metodi base
+per ottenere, aggiungere e togliere i dati della simulazione.
+I sensori sono poi immagazzinati in una classe container che prevede l'aggiunta,
+la rimozione e la modifica dei sensori stessi, nonché la funzione di ricerca per la view.
+
+\texttt{}
+\begin{figure}[h]
+\includesvg[width=\textwidth,height=\textheight,keepaspectratio]{img/Model.svg}
+\caption{UML Modello Logico (immagine \texttt{.svg})}
+\end{figure}
+\newpage
+In particolare (Figura 1) la classe base polimorfa, definita \texttt{GenericSensor},
+rappresenta i campi, come il nome, descrizione, massimi, e dati della simulazione,
+e i metodi comuni ai sensori concreti:
+\begin{itemize}
+    \item \texttt{CPUSensor}
+    \item \texttt{GPUSensor}
+    \item \texttt{RAMSensor}
+\end{itemize}
+Ognuno rispettivamente simula sensori dei tre componenti descritti.
+I dati sono accessibili dal vettore, impostato a \texttt{protected} per
+abilitare l'accesso esclusivamente alle classi figlie (quindi alle implementazioni
+della classe astratta), contenente un tipo di dato personalizzato, definito nella
+classe \texttt{PointInfo}, la quale contiene tutti i dati necessari per definire
+un singolo punto della simulazione, di cui il campo \texttt{m\_bad} serve per indicare se
+il dato è considerato un peggioramento in performance rispetto all'andamento
+della simulazione. I sensori astratti sono salvati nella classe \texttt{SensorContainer},
+per poterli gestire come una lista maneggiabile dalla view (es. aggiunta e rimozione pulsanti).
+Infine ho utilizzato il design pattern Visitor per determinare il tipo dinamico
+di un qualsiasi sensore, tramite le classi \texttt{GenericVisitor} e \texttt{Visitor},
+allo scopo di ottenere le diverse unità di misura per il grafico e mostrare le icone
+corrette a seconda del sensore.
+
 \section{Polimorfismo}
+Grazie al design pattern Visitor ho implementato il polimorfismo non banale
+per la gerarchia \texttt{GenericSensor}, di fatto mi permette di trattare qualsiasi
+sensore come tipo statico \texttt{GenericSensor*}, pur sempre mantenendo le differenze
+tra le implementazioni, utile soprattutto nella view.
+Il Visitor viene principalmente utilizzato per identificare i nomi dei diversi
+componenti, le loro unità di misura nella simulazione, e impostare alcune grafiche.
+Riguardo alla simulazione, ogni sensore agisce sui dati in maniera diversa:
+\begin{itemize}
+    \item \texttt{CPUSensor} - Se la temperatura supera una certa soglia (impostata nel model),
+    vi è un'alta probabilità che la velocità di clock (in MHz) cali eccessivamente.
+    \item \texttt{GPUSensor} - Oltre alla soglia di temperatura, viene controllato
+    se il dato predente è segnato come "bad", cercando quindi di mantenere la performance
+    peggiore.
+    \item \texttt{RAMSensor} - La semantica cambia completamente essendo che il sensore osserva
+    la performance in funzione della memoria utilizzata (in MiB), quindi normalmente
+    l'utilizzo rimane basso, e la "perdita" si avrà quando la memoria non è più capace
+    di gestire i dati alla velocità ottimale, causando un riempimento temporaneo.
+\end{itemize}
+
 \section{Persistenza dei dati}
+Per la persistenza dei dati viene utilizzato il formato strutturato JSON, che permette
+di salvare una lista di sensori e i loro dati simulati (se presenti), con
+identificazione delle classi tramite l'attributo "component"; tutti gli altri
+dati sono salvati con una banale associazione key-value che va a rispecchiare i
+campi delle classi principali. Assieme alla relazione è presente un file di esempio
+(\texttt{example.json}) che si può caricare nell'applicazione tramite la sezione del menù "File".
+
 \section{Funzionalità}
+Le funzionalità del programma sono le seguenti:
+\begin{itemize}
+    \item \textbf{Widget Informazioni Sensore}
+    \begin{itemize}
+        \item Stampa a schermo le informazioni base di un sensore
+        \item Crea una nuova simulazione, svuota la simulazione, e
+        permette la modifica delle informazioni tramite pulsanti
+    \end{itemize}
+    \item \textbf{Widget Lista Sensori}
+    \begin{itemize}
+        \item Mostra il container di sensori, creati e rimossi dinamicamente
+        nella view e mostrati come pulsanti, con aggiunta di icone per mostrare
+        il componente di un sensore
+        \item Prevede tre pulsanti per aggiungere sensori, eliminare il sensore selezionato
+        o eliminarli tutti
+        \item Permette la ricerca di sensori per nome con una semplice barra di ricerca
+    \end{itemize}
+    \item \textbf{Widget Grafico Simulazione}
+    \begin{itemize}
+        \item Converte la simulazione nel model in un grafico, in cui viene
+        sottolineato ogni punto in cui vi è una caduta di performance, tramite
+        colori diversi ed etichette.
+        \item La view contiene una funzione per eliminare completamente il grafico,
+        utile nel caso di reset e/o cancellazione dei sensori
+    \end{itemize}
+    \item \textbf{Menu bar}
+    \begin{itemize}
+        \item Contiene i tasti per salvare e caricare file \texttt{.json}
+        \item Include le rispettive shortcut da tastiera (\texttt{CTRL+s} e \texttt{CTRL+o})
+    \end{itemize}
+\end{itemize}
+
+\newpage
+
 \section{Riepilogo ore}
+\begin{center}
+\begin{tabular}{|c c c|}
+    \hline
+    \textbf{Attività} & \textbf{Ore Previste} & \textbf{Ore Effettive} \\
+    \hline
+    \multicolumn{1}{|l}{Studio e progettazione} & 5 & 7 \\
+    \multicolumn{1}{|l}{Sviluppo del codice del modello} & 10 & 15 \\
+    \multicolumn{1}{|l}{Studio del framework Qt} & 10 & 8 \\
+    \multicolumn{1}{|l}{Sviluppo del codice della GUI} & 15 & 20 \\
+    \multicolumn{1}{|l}{Test e debug} & 5 & 2 \\
+    \multicolumn{1}{|l}{Stesura della relazione} & 5 & 3 \\
+    \hline
+    \textbf{Totale} & \textbf{50} & \textbf{55} \\
+    \hline
+\end{tabular}
+\end{center}
+Ci ho messo più della previsione nella progettazione, poiché avevo un'idea
+iniziale diversa, che si è pure propagata fino allo sviluppo del modello
+(anch'essa conclusa oltre alle ore previste),
+tuttavia, dopo alcune considerazioni, sono arrivato alla conclusione che non
+avevo abbastanza conoscenze base per l'idea precedente, quindi ho preso invece
+un tema a me più vicino. Lo studio di Qt non ha richiesto troppe attenzioni
+personalmente, tuttavia essendo questo il mio primo progetto solitario, in un
+linguaggio a cui non sono completamente abituato, ha allungato le tempistiche
+per lo sviluppo della GUI.
+
 \end{document}
