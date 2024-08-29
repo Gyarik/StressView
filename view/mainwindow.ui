@@ -51,10 +51,22 @@
    <property name="text">
     <string>&amp;Save List</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="actionLoad">
    <property name="text">
-    <string>&amp;Load List</string>
+    <string>&amp;Open List</string>
+   </property>
+   <property name="iconText">
+    <string>Open List</string>
+   </property>
+   <property name="toolTip">
+    <string>Open List</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
  </widget>
